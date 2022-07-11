@@ -1,4 +1,110 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@300;400;700&display=swap");
+
+:root {
+  --white: #ffffff;
+  --background-color: #2c3e50;
+  --link-color: #f1c40f;
+  --line-color: #f2f2f2;
+}
+
 * {
   width: 100%;
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--background-color);
+  font-family: "Roboto Condensed", sans-serif;
+  display: flex;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+aside {
+  width: 200px;
+  padding: 10px 30px;
+  border-right: 1px solid var(--line-color);
+}
+
+aside h1 {
+  margin-bottom: 15px;
+}
+
+aside ul {
+  list-style: none;
+}
+
+aside ul li {
+  margin-bottom: 10px;
+}
+
+aside ul li a {
+  color: var(--white);
+  text-decoration: none;
+}
+
+aside ul li a:hover {
+  color: var(--link-color);
+}
+
+header {
+  border-bottom: 1px solid var(--line-color);
+  padding: 10px 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.arrows {
+  width: 50px;
+}
+
+header ul {
+  margin: 0 auto;
+  list-style: none;
+  display: flex;
+  overflow: hidden;
+  position: relative;
+}
+
+header ul li {
+  list-style: none;
+  margin: 0 5px;
+  border: 1px solid var(--line-color);
+}
+
+header .arrows {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  text-align: center;
+  font-size: 35px;
+  color: var(--white);
+  cursor: pointer;
+  z-index: 999;
+}
+
+.carousel-wrapper {
+  padding: 10px 0;
+}
+
+.carousel-item {
+  transition: all 0.5s;
+}
+
+.carousel-item.active {
+  border: 2px solid var(--line-color);
+}
+
+.carousel-image {
+  display: flex;
+  justify-content: center;
+}
+
+.carousel-image img {
+  width: 600px;
+  height: 600px;
+  border: 1px solid var(--line-color);
 }
