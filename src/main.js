@@ -1,7 +1,7 @@
 import "./style.css";
 
 // Select slides
-const slides = document.querySelectorAll('.carousel-item')
+const slides = document.querySelectorAll('.carousel-item');
 
 // current slide counter
 let curSlide = 0;
