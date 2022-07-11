@@ -1,0 +1,33 @@
+{
+  "name": "atmm.specific.boilerplate.html",
+  "version": "1.0.0",
+  "description": "This is a project for test job position in Company Yahoo Search.",
+  "main": "./src/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack -w",
+    "build": "export NODE_ENV=production && webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+project.test.yahoo.search.git"
+  },
+  "keywords": [],
+  "author": "Anderson Martins",
+  "license": "ISC",
+  "bugs": {
+    "url": "project.test.yahoo.search/issues"
+  },
+  "homepage": "project.test.yahoo.search#readme",
+  "devDependencies": {
+    "@babel/cli": "^7.15.7",
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "@tailwindcss/forms": "^0.5.2",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^6.3.0",
+    "style-loader": "^3.3.0",
+    "webpack": "^5.55.1",
+    "webpack-cli": "^4.8.0"
+  }
+}
