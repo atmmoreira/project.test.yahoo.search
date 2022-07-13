@@ -9,16 +9,15 @@
 
 * {
   width: 100%;
-  box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
 body {
+  height: 100vh;
   background-color: var(--background-color);
   font-family: "Roboto Condensed", sans-serif;
   display: flex;
-  height: 100vh;
   overflow-x: hidden;
 }
 
@@ -29,6 +28,8 @@ aside {
 }
 
 aside h1 {
+  color: var(--white);
+  font-size: 30px;
   margin-bottom: 15px;
 }
 
@@ -52,6 +53,11 @@ aside ul li a:hover {
 header {
   border-bottom: 1px solid var(--line-color);
   padding: 10px 0;
+}
+
+.wrapper-carousel {
+  margin: 0 auto;
+  width: 900px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,6 +69,7 @@ header {
 
 header ul {
   margin: 0 auto;
+  width: 900px;
   list-style: none;
   display: flex;
   overflow: hidden;
@@ -94,17 +101,31 @@ header .arrows {
   transition: all 0.5s;
 }
 
+.carousel-item img,
+li.carousel-item {
+  width: 150px;
+  height: 150px;
+}
+
 .carousel-item.active {
   border: 2px solid var(--line-color);
 }
 
-.carousel-image {
+.carousel-info {
   display: flex;
   justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
-.carousel-image img {
+.carousel-info img {
   width: 600px;
   height: 600px;
   border: 1px solid var(--line-color);
+}
+
+.carousel-info p {
+  text-align: center;
+  color: var(--white);
+  margin-top: 20px;
 }

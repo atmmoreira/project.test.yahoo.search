@@ -1,4 +1,31 @@
 import "./style.css";
+import { groupById, getPhotosApi } from "./helpers/utils";
+
+let getAlbunsApi = getPhotosApi();
+getAlbunsApi.then(data => {
+
+  let groupAlbunsId = groupById(data, 'albumId');
+  let clicledLi = document.querySelectorAll(`.albums-itens`);
+  let imageUlPhoto = document.querySelector('.carousel');
+  const ulListAlbunsID = document.querySelector('.albuns');
+  const firstTwentyAlbuns = Object.keys(groupAlbunsId).slice(0, 20);
+
+  for (const key in firstTwentyAlbuns) {
+    ulListAlbunsID.innerHTML += `<li class="albums-itens"><a href="#">- Album ${firstTwentyAlbuns[key]}</a></li>`;
+  }
+
+  clicledLi.forEach((item, index) => {
+    item.addEventListener('click', () => {
+      let indexIdAlbuns = index + 1;
+      const objectAlbumPhotos = groupAlbunsId[indexIdAlbuns];
+
+      imageUlPhoto.innerHTML = '';
+      for (const key of objectAlbumPhotos) {
+        imageUlPhoto.innerHTML += `<li class="carousel-item"> <img src="${key.thumbnailUrl}" alt="" /> </li>`;
+      }
+    })
+  })
+});
 
 // Select slides
 const slides = document.querySelectorAll('.carousel-item');
@@ -24,7 +51,6 @@ nextSlide.addEventListener("click", function () {
     slide.style.transform = `translateX(${100 * (indx - curSlide)}px)`;
   });
 });
-
 
 // add event listener and navigation functionality
 prevSlide.addEventListener("click", function () {
