@@ -55,7 +55,7 @@ header {
   padding: 10px 0;
 }
 
-.wrapper-carousel {
+.thumbnailCarousel {
   margin: 0 auto;
   width: 900px;
   display: flex;
@@ -63,7 +63,7 @@ header {
   justify-content: center;
 }
 
-.arrows {
+.thumbnailCarousel i {
   width: 50px;
 }
 
@@ -78,11 +78,11 @@ header ul {
 
 header ul li {
   list-style: none;
-  margin: 0 5px;
-  border: 1px solid var(--line-color);
+  margin: 5px;
+  border: 1px solid var(--white);
 }
 
-header .arrows {
+header i {
   display: flex;
   justify-items: center;
   align-items: center;
@@ -93,38 +93,39 @@ header .arrows {
   z-index: 999;
 }
 
-.carousel-wrapper {
+.imageViewer {
   padding: 10px 0;
 }
 
-.carousel-item {
+.thumbnailCarousel-item {
   transition: all 0.5s;
 }
 
-.carousel-item img,
-li.carousel-item {
+.thumbnailCarousel-item img,
+li.thumbnailCarousel-item {
   width: 150px;
   height: 150px;
 }
 
-.carousel-item.active {
-  border: 2px solid var(--line-color);
+.imageViewer-info.active img,
+.thumbnailCarousel-item.active img {
+  border: 2px solid var(--white);
 }
 
-.carousel-info {
+.imageViewer-info {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
-.carousel-info img {
+.imageViewer-info img {
   width: 600px;
   height: 600px;
   border: 1px solid var(--line-color);
 }
 
-.carousel-info p {
+.imageViewer-info p {
   text-align: center;
   color: var(--white);
   margin-top: 20px;

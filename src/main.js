@@ -2,69 +2,67 @@ import "./style.css";
 
 import { groupById, getPhotosApi } from "./helpers/utils";
 
-let getAlbunsApi = getPhotosApi();
+let getPhotoApi = getPhotosApi();
 
 const generateAlbumMenu = () => {
-  getAlbunsApi.then(data => {
+  getPhotoApi.then(data => {
     let groupAlbunsId = groupById(data, 'albumId');
-    const ulListAlbunsID = document.querySelector('.albuns');
+    const ulAlbumList = document.querySelector('.albumList-list');
     const firstTwentyAlbuns = Object.keys(groupAlbunsId).slice(0, 20);
 
     for (const key in firstTwentyAlbuns) {
-      ulListAlbunsID.innerHTML += `<li class="albums-itens"><a href="#">- Album ${firstTwentyAlbuns[key]}</a></li>`;
+      ulAlbumList.innerHTML += `<li class="albumList-item"><a href="#">- Album ${firstTwentyAlbuns[key]}</a></li>`;
     }
   });
 }
 
-const loadPhotosList = () => {
-  getAlbunsApi.then(data => {
+const generatePhotosList = () => {
+  getPhotoApi.then(data => {
     let groupAlbunsId = groupById(data, 'albumId');
-    let clicledLi = document.querySelectorAll(`.albums-itens`);
-    let imageUlPhoto = document.querySelector('.carousel');
-    clicledLi.forEach((item, index) => {
+    let albumListItem = document.querySelectorAll('.albumList-item');
+    let ulThumbnailCarousel = document.querySelector('.thumbnailCarousel-items');
+
+    albumListItem.forEach((item, index) => {
       item.addEventListener('click', () => {
         let indexIdAlbuns = index + 1;
         const objectAlbumPhotos = groupAlbunsId[indexIdAlbuns];
 
-        imageUlPhoto.innerHTML = '';
+        ulThumbnailCarousel.innerHTML = '';
         for (const key of objectAlbumPhotos) {
-          imageUlPhoto.innerHTML += `<li class="carousel-item"> <img src="${key.thumbnailUrl}" alt="" /> </li>`;
+          ulThumbnailCarousel.innerHTML += `<li class="thumbnailCarousel-item"> <img src="${key.thumbnailUrl}" alt="" /> </li>`;
         }
       })
     });
-
   });
 }
 
 const loadFirstAlbum = () => {
-  getAlbunsApi.then(data => {
+  getPhotoApi.then(data => {
     let groupAlbunsId = groupById(data, 'albumId');
     let albumPhotoIdOne = Object.keys(groupAlbunsId).slice(0, 1);
-    let imageUlPhoto = document.querySelector('.carousel');
+    let imageUlPhoto = document.querySelector('.thumbnailCarousel-items');
 
     if (albumPhotoIdOne == '1') {
       const objectAlbumPhotos = groupAlbunsId[albumPhotoIdOne];
       for (const key of objectAlbumPhotos) {
-        imageUlPhoto.innerHTML += `<li class="carousel-item"> <img src="${key.thumbnailUrl}" alt="" /> </li>`;
+        let createUlThumbnailItem = document.createElement('ul');
+        createUlThumbnailItem.classList.add('thumbnailCarousel-item');
+        let createLiThumbnailItem = document.createElement('li');
+        createLiThumbnailItem.classList.add('thumbnailCarousel-item');
+        let imgThumbnailItem = document.createElement('img');
+        imgThumbnailItem.setAttribute('src', `${key.thumbnailUrl}`);
+        createLiThumbnailItem.appendChild(imgThumbnailItem);
+        imageUlPhoto.appendChild(createLiThumbnailItem);
       }
     }
   })
 }
 
-const loadAlbumInfo = () => {
-  getAlbunsApi.then(data => {
-    let groupAlbunsId = groupById(data, 'albumId');
-    let albumPhotoIdOne = Object.keys(groupAlbunsId).slice(0, 1);
-    let imageInfo = document.querySelectorAll('.carousel-item');
-    imageInfo.forEach(image => {
-      image.addEventListener('click', () => {
-        console.log(imageInfo);
-      })
-    })
+// const loadAlbumInfo = () => {
+//   let listPhotoItens = document.querySelector('.thumbnailCarousel-item');
+//   console.log(listPhotoItens);
+// }
 
-
-  })
-}
 
 /** Moviment of images
  *
@@ -108,12 +106,9 @@ const loadAlbumInfo = () => {
   });
  */
 
-
-
-
 window.onload = () => {
   loadFirstAlbum();
   generateAlbumMenu();
-  loadPhotosList();
-  loadAlbumInfo();
+  generatePhotosList();
+  // loadAlbumInfo();
 }
