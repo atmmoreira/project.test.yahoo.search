@@ -5,14 +5,13 @@ import { groupById, getPhotosApi } from "./helpers/utils";
 let getPhotoApi = getPhotosApi();
 
 const loadFirstAlbum = async () => {
-  return getPhotoApi.then(data => {
+  return await getPhotoApi.then(data => {
     let groupAlbunsId = groupById(data, 'albumId');
     let albumPhotoIdOne = Object.keys(groupAlbunsId).slice(0, 1);
     let imageUlPhoto = document.querySelector('.thumbnailCarousel-items');
 
     if (albumPhotoIdOne == '1') {
       const objectAlbumPhotos = groupAlbunsId[albumPhotoIdOne];
-
       for (const key of objectAlbumPhotos) {
         let createLiThumbnailItem = document.createElement('li');
         createLiThumbnailItem.classList.add('thumbnailCarousel-item');
@@ -26,7 +25,7 @@ const loadFirstAlbum = async () => {
 }
 
 const generateAlbumMenu = async () => {
-  return getPhotoApi.then(data => {
+  return await getPhotoApi.then(data => {
     let groupAlbunsId = groupById(data, 'albumId');
     const ulAlbumList = document.querySelector('.albumList-list');
     const firstTwentyAlbuns = Object.keys(groupAlbunsId).slice(0, 20);
@@ -38,7 +37,7 @@ const generateAlbumMenu = async () => {
 }
 
 const generatePhotosList = async () => {
-  return getPhotoApi.then(data => {
+  await getPhotoApi.then(data => {
     let groupAlbunsId = groupById(data, 'albumId');
     let albumListItem = document.querySelectorAll('.albumList-item');
     let ulThumbnailCarousel = document.querySelector('.thumbnailCarousel-items');
@@ -58,15 +57,11 @@ const generatePhotosList = async () => {
 }
 
 
-const loadAlbumInfo = () => {
-  let listPhotoItens = document.querySelectorAll('.thumbnailCarousel-item');
-
-  listPhotoItens.forEach(item => {
-    item.addEventListener('click', () => {
-      console.log('Funcionando');
-    })
-  })
+const loadAlbumInfo = async () => {
+  let listPhotoItens = document.querySelector('.thumbnailCarousel-item');
+  console.log(listPhotoItens);
 }
+
 
 /** Moviment of images
  *
@@ -110,10 +105,9 @@ const loadAlbumInfo = () => {
   });
  */
 
-window.onload = async () => {
+window.onload = () => {
   loadFirstAlbum();
-  await generateAlbumMenu();
-  await generatePhotosList();
+  generateAlbumMenu();
+  generatePhotosList();
   loadAlbumInfo();
-
 }
