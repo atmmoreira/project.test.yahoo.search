@@ -9,10 +9,20 @@ const loadFirstAlbum = async () => {
     let groupAlbunsId = groupById(data, 'albumId');
     let albumPhotoIdOne = Object.keys(groupAlbunsId).slice(0, 1);
     let imageUlPhoto = document.querySelector('.thumbnailCarousel-items');
+    const objectAlbumPhotos = groupAlbunsId[albumPhotoIdOne];
+
+    objectAlbumPhotos.filter(i => {
+      if (i.albumId === 1 && i.id === 1) {
+        let imageViewer = document.querySelector('.imageViewer-info');
+        imageViewer.innerHTML = `
+          <img src='${i.url}' alt="" />
+          <p> ${i.title} </p>
+        `
+        return
+      }
+    })
 
     if (albumPhotoIdOne == '1') {
-      const objectAlbumPhotos = groupAlbunsId[albumPhotoIdOne];
-
       for (const key of objectAlbumPhotos) {
         let createLiThumbnailItem = document.createElement('li');
         createLiThumbnailItem.classList.add('thumbnailCarousel-item');
@@ -61,9 +71,16 @@ const generatePhotosList = async () => {
 const loadAlbumInfo = () => {
   let listPhotoItens = document.querySelectorAll('.thumbnailCarousel-item');
 
+  getPhotoApi.then(data => {
+    let groupAlbunsId = groupById(data, 'albumId');
+    for (const key in groupAlbunsId) {
+      // console.log(key);
+    }
+  })
+
   listPhotoItens.forEach(item => {
     item.addEventListener('click', () => {
-      console.log('Funcionando');
+      // console.log('Funcionando');
     })
   })
 }
