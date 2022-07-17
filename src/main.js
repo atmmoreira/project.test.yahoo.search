@@ -1,6 +1,10 @@
 import "./style.css";
 
-import { groupById, getPhotosApi } from "./helpers/utils";
+import {
+  groupById,
+  getPhotosApi,
+  modelAlbumPhoto
+} from "./helpers/utils";
 
 let getPhotoApi = getPhotosApi();
 
@@ -12,17 +16,16 @@ const loadFirstAlbum = async () => {
     const objectAlbumPhotos = groupAlbunsId[albumPhotoIdOne];
 
     objectAlbumPhotos.filter(i => {
-      if (i.albumId === 1 && i.id === 1) {
+      if (i.albumId === modelAlbumPhoto.albumId && i.id === modelAlbumPhoto.id) {
         let imageViewer = document.querySelector('.imageViewer-info');
         imageViewer.innerHTML = `
           <img src='${i.url}' alt="" />
           <p> ${i.title} </p>
         `
-        return
       }
     })
 
-    if (albumPhotoIdOne == '1') {
+    if (albumPhotoIdOne == modelAlbumPhoto.id) {
       for (const key of objectAlbumPhotos) {
         let createLiThumbnailItem = document.createElement('li');
         createLiThumbnailItem.classList.add('thumbnailCarousel-item');
@@ -52,11 +55,11 @@ const generatePhotosList = async () => {
     let groupAlbunsId = groupById(data, 'albumId');
     let albumListItem = document.querySelectorAll('.albumList-item');
     let ulThumbnailCarousel = document.querySelector('.thumbnailCarousel-items');
-
     albumListItem.forEach((item, index) => {
       item.addEventListener('click', () => {
         let indexIdAlbuns = index + 1;
-        const objectAlbumPhotos = groupAlbunsId[indexIdAlbuns];
+        let objectAlbumPhotos = groupAlbunsId[indexIdAlbuns];
+        console.log(indexIdAlbuns);
 
         ulThumbnailCarousel.innerHTML = '';
         for (const key of objectAlbumPhotos) {
@@ -132,5 +135,4 @@ window.onload = async () => {
   await generateAlbumMenu();
   await generatePhotosList();
   loadAlbumInfo();
-
 }

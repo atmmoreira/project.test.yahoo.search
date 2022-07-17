@@ -1,7 +1,16 @@
+export const modelAlbumPhoto = {
+  albumId: 1,
+  id: 1,
+  title: "",
+  url: "",
+  thumbnailUrl: ""
+}
+
 export async function getPhotosApi() {
   try {
     let response = await fetch('https://jsonplaceholder.typicode.com/photos/');
-    return await response.json();
+    let data = await response.json();
+    return data;
   } catch (error) {
     console.error(error);
   }
